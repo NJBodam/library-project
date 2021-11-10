@@ -1,6 +1,11 @@
 package model;
 import enums.Role;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 
 public class Person {
@@ -9,28 +14,25 @@ public class Person {
     private int priority;
 
     public Person(String name, Role role, int priority) {
-        //Implementing Validation
         this.name = name;
         this.role = role != null ? role : Role.TEACHER;
 
-        setPriority();
+        //setPriority();
     }
 
-    private void setPriority() {
-        if(role == Role.TEACHER) {
-            this.priority = Role.TEACHER.getPriority();
-        } else if(role == Role.SENIOR_STUDENT) {
-            this.priority = Role.SENIOR_STUDENT.getPriority();
-        } else {
-            this.priority = Role.JUNIOR_STUDENT.getPriority();
-        }
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-    /*public Person(String damilola, Role others) {
-    }*/
+//    private void setPriority() {
+//        if(role == Role.TEACHER) {
+//            this.priority = Role.TEACHER.getPriority();
+//        } else if(role == Role.SENIOR_STUDENT) {
+//            this.priority = Role.SENIOR_STUDENT.getPriority();
+//        } else {
+//            this.priority = Role.JUNIOR_STUDENT.getPriority();
+//        }
+//    }
+//
+//    public int getPriority() {
+//        return priority;
+//    }
 
     public String getName() {
         return name;

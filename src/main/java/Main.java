@@ -1,45 +1,102 @@
 import enums.Role;
+import model.Book;
+import model.Library;
 import model.Person;
-import service.Books;
-import service.Librarian;
-import service.Librararian;
+import service.ServiceImpl.Librarian;
+import service.ServiceImpl.PersonServiceIpl;
+
+import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        Person other5 = new Person("Enoch Oghene", Role.SENIOR_STUDENT, 3);
-        Person other6 = new Person("Paul Play", Role.JUNIOR_STUDENT, 2);
-        Person elder1 = new Person("David Orji", Role.TEACHER, 1);
-        Person other7 = new Person("Makera Apiri", Role.SENIOR_STUDENT, 3);
+        Person paul = new Person("Paul Play", Role.JUNIOR_STUDENT, 2);
+        Person enoch = new Person("Enoch Oghene", Role.SENIOR_STUDENT, 3);
+        Person david = new Person("David Orji", Role.TEACHER, 1);
+        Person makera = new Person("Makera Apiri", Role.SENIOR_STUDENT, 3);
+        PersonServiceIpl psimp = new PersonServiceIpl();
+        //Librarian librarian = new Librarian();
+        Library myLib = Library.getInstance();
+        Librarian librarian = Librarian.getInstance();
+
+        List<Book> bookList = List.of(new Book("Obsidian Palace", "Aniks Daermon Elvira", "Elvira Prints", 16),
+                new Book("Only Human", "Velasco Daermon Pheles", "Elvira Prints", 14),
+                new Book("Stormbringer's Temple", "7th Division", "Elvira Prints", 3));
+
+        //Add the list of books in bookList to the Library store
+        librarian.addBooksToLibrary(bookList);
+        //Register the below Persons as eligible library users
+        librarian.registerBooker(enoch);
+        librarian.registerBooker(david);
+        librarian.registerBooker(paul);
+        librarian.registerBooker(makera);
 
 
-        // Here we call our service implementation/ VoterRegistrationService
-        // We passed the implementation of the voter's registration point implementation
-        // to the voter's registration point.
-        Librarian bookingServices = new Librararian();
-        // Here are the people we want to book
-        // See if you can add the book title to the constructor so it receives it as an argument
-        // Forget preceding line, we don't need that...I think
-        bookingServices.giveABook(other5);
-        bookingServices.giveABook(other6);
-        bookingServices.giveABook(elder1);
-
-        bookingServices.registerBooker();
-        bookingServices.registerBooker();
-        bookingServices.registerBooker();
-
-        bookingServices.printBookers();
+        //System.out.println("LIST OF REGISTERED USERS");
 
 
-        // Issuing Books
+        //System.out.println("LIST OF LIBRARY USERS");
+        //System.out.println(Librarian.getRegisteredBookers());
 
-        Books palace = new Books("Obsidian Palace", "Aniks Daermon Elvira", "Elvira Prints", 16);
-        Books human = new Books("Only Human", "Velasco Daermon Pheles", "Elvira Prints", 14);
-        Books temple = new Books("Stormbringer's Temple", "7th Division", "Elvira Prints", 3);
+        // bookingServices.printBookers();
+//
+//
+//
+//        System.out.println("PERSON QUEUE LIST");
+//        System.out.println(librarian.getPersonQueue());
+//
+//        System.out.println("PERSON QUEUE POLL");
+//        System.out.println(librarian.getPersonQueue().poll());
+//        System.out.println(librarian.getPersonQueue().poll());
+//        System.out.println(librarian.getPersonQueue().poll());
+//        System.out.println(librarian.getPersonQueue().poll());
+        //System.out.println("=======================");
 
-        Books.bookMap(palace);
-        Books.bookMap(human);
-        Books.bookMap(temple);
 
-       */
+
+        // Issuing Book
+
+
+        Book obsidian = bookList.get(1);
+        Book onlyHuman = bookList.get(2);
+        psimp.requestForBook(enoch, myLib, obsidian);
+        psimp.requestForBook(makera, myLib, obsidian);
+        psimp.requestForBook(david, myLib, obsidian);
+        psimp.requestForBook(paul, myLib, obsidian);
+
+        System.out.println("Giving book with no priority ******************");
+        System.out.println(librarian.giveABook(obsidian));
+        System.out.println(librarian.giveABook(obsidian));
+        System.out.println(librarian.giveABook(obsidian));
+        System.out.println(librarian.giveABook(obsidian));
+        System.out.println("Printing list of book borrowers ***************");
+        librarian.printBookers();
+        System.out.println();
+
+        psimp.requestForBook(enoch, myLib, onlyHuman);
+        psimp.requestForBook(makera, myLib, onlyHuman);
+        psimp.requestForBook(david, myLib, onlyHuman);
+        psimp.requestForBook(paul, myLib, onlyHuman);
+        System.out.println("Giving book by priority **********************");
+        System.out.println(librarian.giveABookByPriority(onlyHuman));
+        System.out.println(librarian.giveABookByPriority(onlyHuman));
+        System.out.println(librarian.giveABookByPriority(onlyHuman));
+        System.out.println(librarian.giveABookByPriority(onlyHuman));
+        System.out.println("Printing list of VIP borrowers ***************");
+        librarian.printVIPBookers();
+
+//        System.out.println("PRIORITY QUEUE LIST");
+//        System.out.println(librarian.getPriorityQueue());
+//
+//
+//        System.out.println("PERSON POLLED");
+//        System.out.println(librarian.getPriorityQueue().poll());
+//        System.out.println(librarian.getPriorityQueue().poll());
+//        System.out.println(librarian.getPriorityQueue().poll());
+//        System.out.println(librarian.getPriorityQueue().poll());
+//
+
+
+
     }
 }

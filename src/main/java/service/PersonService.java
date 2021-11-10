@@ -1,8 +1,15 @@
 package service;
 
+import model.Book;
+import model.Library;
 import model.Person;
+import service.ServiceImpl.Librarian;
 
 public interface PersonService {
-    void requestForBook(Person borrower, Librararian library, Books book);
-    void returnABook(Librararian library, Books book);
+
+    String requestForBook(Person borrower, Library library, Book book);
+
+    void returnABook(Librarian library, Book book);
+
+
 }

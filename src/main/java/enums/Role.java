@@ -3,7 +3,8 @@ package enums;
 public enum Role {
     TEACHER(1),
     SENIOR_STUDENT(2),
-    JUNIOR_STUDENT(3);
+    JUNIOR_STUDENT(3),
+    LIBRARIAN(1);
 
     private int priority;
 
