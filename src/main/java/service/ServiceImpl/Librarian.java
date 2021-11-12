@@ -7,6 +7,7 @@ import model.Person;
 import service.LibrarianService;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class Librarian extends Person implements LibrarianService {
@@ -41,17 +42,18 @@ public class Librarian extends Person implements LibrarianService {
         Person borrower = library.getPersonQueue().remove();
         if (borrower != null){
             library.addToBorrowedList(borrower, book);
-            return "Book borrowed to " +borrower.getName();
+            return book.getBookTitle() + "Book borrowed to " +borrower.getName();
         }
         else return "No body on queue";
     }
+
 
     @Override
     public String giveABookByPriority(Book book) {
         if (!(library.getPriorityQueue().isEmpty())){
             Person borrower = library.getPriorityQueue().remove();
             library.addToVIPBorrowersList(borrower, book);
-            return "Book borrowed to " +borrower.getName();
+            return book.getBookTitle() + "Book borrowed to " +borrower.getName();
         }
         else return "No body on queue";
     }
@@ -85,15 +87,16 @@ public class Librarian extends Person implements LibrarianService {
         library.getRegisteredBookers().add(booker);
     }
 
+
     @Override
     public void printBookers() {
         // Prints everyone that has collected a book
         //Lambda expression used to print persons who have borrowed a book
-        library.getBorrowedBooks().keySet().forEach(person -> System.out.println(person));
+        library.getBorrowedBooks().keySet().forEach(System.out::println);
     }
 
     public void printVIPBookers(){
-        library.getVipBorrowers().keySet().forEach(person -> System.out.println(person));
+        library.getVipBorrowers().keySet().forEach(System.out::println);
     }
 
     @Override

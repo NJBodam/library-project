@@ -6,6 +6,9 @@ import service.ServiceImpl.Librarian;
 import service.ServiceImpl.PersonServiceIpl;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -15,7 +18,7 @@ public class Main {
         Person david = new Person("David Orji", Role.TEACHER, 1);
         Person makera = new Person("Makera Apiri", Role.SENIOR_STUDENT, 3);
         PersonServiceIpl psimp = new PersonServiceIpl();
-        //Librarian librarian = new Librarian();
+
         Library myLib = Library.getInstance();
         Librarian librarian = Librarian.getInstance();
 
@@ -32,44 +35,22 @@ public class Main {
         librarian.registerBooker(makera);
 
 
-        //System.out.println("LIST OF REGISTERED USERS");
-
-
-        //System.out.println("LIST OF LIBRARY USERS");
-        //System.out.println(Librarian.getRegisteredBookers());
-
-        // bookingServices.printBookers();
-//
-//
-//
-//        System.out.println("PERSON QUEUE LIST");
-//        System.out.println(librarian.getPersonQueue());
-//
-//        System.out.println("PERSON QUEUE POLL");
-//        System.out.println(librarian.getPersonQueue().poll());
-//        System.out.println(librarian.getPersonQueue().poll());
-//        System.out.println(librarian.getPersonQueue().poll());
-//        System.out.println(librarian.getPersonQueue().poll());
-        //System.out.println("=======================");
-
-
-
-        // Issuing Book
-
-
+        // Initializing Book
         Book obsidian = bookList.get(1);
         Book onlyHuman = bookList.get(2);
-        psimp.requestForBook(enoch, myLib, obsidian);
+        Book stormBringersTemple = bookList.get(0);
+
+        psimp.requestForBook(enoch, myLib, onlyHuman);
         psimp.requestForBook(makera, myLib, obsidian);
-        psimp.requestForBook(david, myLib, obsidian);
+        psimp.requestForBook(david, myLib, stormBringersTemple);
         psimp.requestForBook(paul, myLib, obsidian);
 
         System.out.println("Giving book with no priority ******************");
+        System.out.println(librarian.giveABook(onlyHuman));
         System.out.println(librarian.giveABook(obsidian));
+        System.out.println(librarian.giveABook(stormBringersTemple));
         System.out.println(librarian.giveABook(obsidian));
-        System.out.println(librarian.giveABook(obsidian));
-        System.out.println(librarian.giveABook(obsidian));
-        System.out.println("Printing list of book borrowers ***************");
+        System.out.println("Printing list of book borrowers: Queue ***************");
         librarian.printBookers();
         System.out.println();
 
@@ -82,19 +63,8 @@ public class Main {
         System.out.println(librarian.giveABookByPriority(onlyHuman));
         System.out.println(librarian.giveABookByPriority(onlyHuman));
         System.out.println(librarian.giveABookByPriority(onlyHuman));
-        System.out.println("Printing list of VIP borrowers ***************");
+        System.out.println("Printing list of borrowers: Priority Queue ***************");
         librarian.printVIPBookers();
-
-//        System.out.println("PRIORITY QUEUE LIST");
-//        System.out.println(librarian.getPriorityQueue());
-//
-//
-//        System.out.println("PERSON POLLED");
-//        System.out.println(librarian.getPriorityQueue().poll());
-//        System.out.println(librarian.getPriorityQueue().poll());
-//        System.out.println(librarian.getPriorityQueue().poll());
-//        System.out.println(librarian.getPriorityQueue().poll());
-//
 
 
 

@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="LibraryProjectMould" />
         <module name="LibraryProjectNew" />
+        <module name="LibraryProjectMould copy" />
+        <module name="LibrarySystemProject" />
       </profile>
     </annotationProcessing>
   </component>

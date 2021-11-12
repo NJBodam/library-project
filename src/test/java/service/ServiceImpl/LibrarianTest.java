@@ -48,7 +48,6 @@ class LibrarianTest {
     void addPersonToQueue() {
         Librarian librarian = new Librarian("Ikechukwu", Role.LIBRARIAN,1);
         Person person = new Person("sfge",Role.SENIOR_STUDENT,2);
-        Library library = new Library();
         librarian.addPersonToQueue(person);
         final String expectedOutput = "Person already on queue";
         final String actualOutput = librarian.addPersonToQueue(person);
